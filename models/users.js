@@ -14,9 +14,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Users.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type:DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: '入力項目が正しくありません'
+        },
+      }
+    },
+    email: {
+      type:DataTypes.STRING,
+      validate: {
+        isEmail: {
+          msg: '入力項目が正しくありません'
+        },
+        notEmpty: {
+          msg: '入力項目が正しくありません'
+        },
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: '入力項目が正しくありません'
+        },
+      }
+    }
   }, {
     sequelize,
     modelName: 'Users',
