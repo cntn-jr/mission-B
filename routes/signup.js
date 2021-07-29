@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const { session } = require('passport');
 
 router.get('/', (req, res, next)=>{
-    res.render('signup')
+    res.render('signup', { layout: false })
 });
 
 router.post('/', (req, res, next)=>{

@@ -16,6 +16,9 @@ const signupRouter = require('./routes/signup');
 
 var app = express();
 
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -46,7 +49,7 @@ app.get('/login', (req, res, next) => {
   if(req.user){
     user = req.user;
   }
-  res.render('login');
+  res.render('login', { layout: false });
 })
 
 app.post('/login',
