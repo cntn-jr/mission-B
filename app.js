@@ -13,6 +13,7 @@ const Users = require('./models').Users;
 
 var indexRouter = require('./routes/index');
 const signupRouter = require('./routes/signup');
+const questionRouter = require('./routes/question');
 
 var app = express();
 
@@ -42,7 +43,8 @@ app.use(passport.session({
 }));
 
 app.use('/', indexRouter);
-app.use('/signup', signupRouter)
+app.use('/signup', signupRouter);
+app.use('/question', questionRouter);
 
 app.get('/login', (req, res, next) => {
   const user = '';
