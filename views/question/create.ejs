@@ -5,9 +5,83 @@
                 <h4>質問作成</h4>
             </div>
             <div class="card-body">
-              
+                <form action='/question/create' method='post'>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name='title' id='title' required>
+                    </div>
+                    <div id='addFormArea' class='my-3'></div>
+                    <div class='form-group mt-5'>
+                        <button class='btn btn-primary btn-sm mr-2' id='addTextarea' type='button'>+</button><label for='addTextarea'>テキストエリアの追加</label>
+                    </div>
+                    <div class='from-group'>
+                        <button class='btn btn-primary btn-sm mr-2' id='addCheckbox' type='button'>+</button><label for='addCheckbox'>チェックボックスの追加</label>
+                    </div>
+                    <div class='text-right mt-5'>
+                        <button class='btn btn-info btn-lg' type='submit' id='createFormBtn'>作成</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    'use strict';
+    const addFormArea = document.getElementById('addFormArea');
+    const addTextarea = document.getElementById('addTextarea');
+    addTextarea.addEventListener('click', ()=>{
+        const divFormGroup = document.createElement('div');
+        divFormGroup.classList.add('form-group');
+        divFormGroup.classList.add('my-4');
+        divFormGroup.classList.add('textarea');
+
+        const inputTitle = document.createElement('input');
+        inputTitle.type = 'text'
+        inputTitle.classList.add('form-control');
+        inputTitle.classList.add('col-5');
+        inputTitle.classList.add('my-3');
+        inputTitle.classList.add('inputTitle');
+        inputTitle.required = true;
+        let textareaNum = document.getElementsByClassName('textarea').length;
+        inputTitle.name = 'titleText' + String(textareaNum+1);
+        inputTitle.placeholder = '質問' + String(textareaNum+1);
+
+        const textareaDisabled = document.createElement('input');
+        textareaDisabled.type = 'text';
+        textareaDisabled.classList.add('form-control');
+        textareaDisabled.classList.add('my-3');
+        textareaDisabled.classList.add('textareaDummy');
+        textareaDisabled.disabled = true;
+        textareaDisabled.placeholder = '回答' + String(textareaNum+1);
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.textContent = '削除';
+        delBtn.classList.add('btn');
+        delBtn.classList.add('btn-sm');
+        delBtn.classList.add('btn-danger');
+        delBtn.classList.add('col-1');
+        delBtn.classList.add('m-3');
+        delBtn.addEventListener('click', ()=>{
+            delBtn.parentElement.parentElement.remove();
+            const inputTitles = document.getElementsByClassName('inputTitle');
+            const textareaDummies = document.getElementsByClassName('textareaDummy');
+            for(let i = 0; i < inputTitles.length; i++){
+                inputTitles[i].name = 'title' + String(i+1);
+                inputTitles[i].placeholder = '質問' + String(i+1);
+                textareaDummies[i].placeholder = '回答' + String(i+1);
+            }
+        })
+
+        const titleRow = document.createElement('div');
+        titleRow.classList.add('row')
+        titleRow.classList.add('col-12')
+
+        titleRow.appendChild(inputTitle);
+        titleRow.appendChild(delBtn);
+        divFormGroup.appendChild(titleRow);
+        divFormGroup.appendChild(textareaDisabled);
+        addFormArea.appendChild(divFormGroup);
+    })
+</script>
