@@ -7,7 +7,7 @@
             <div class="card-body">
                 <form action='/question/create' method='post'>
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">質問のタイトル</label>
                         <input type="text" class="form-control" name='title' id='title' required>
                     </div>
                     <div id='addFormArea' class='my-3'></div>
@@ -15,7 +15,7 @@
                         <button class='btn btn-primary btn-sm mr-2' id='addTextarea' type='button'>+</button><label for='addTextarea'>テキストエリアの追加</label>
                     </div>
                     <div class='from-group'>
-                        <button class='btn btn-primary btn-sm mr-2' id='addCheckbox' type='button'>+</button><label for='addCheckbox'>チェックボックスの追加</label>
+                        <button class='btn btn-primary btn-sm mr-2' id='addRadio' type='button'>+</button><label for='addRadio'>ラジオボタンの追加</label>
                     </div>
                     <div class='text-right mt-5'>
                         <button class='btn btn-info btn-lg' type='submit' id='createFormBtn'>作成</button>
@@ -30,22 +30,17 @@
     'use strict';
     const addFormArea = document.getElementById('addFormArea');
     const addTextarea = document.getElementById('addTextarea');
-    addTextarea.addEventListener('click', ()=>{
-        const divFormGroup = document.createElement('div');
-        divFormGroup.classList.add('form-group');
-        divFormGroup.classList.add('my-4');
-        divFormGroup.classList.add('textarea');
+    const addRadio = document.getElementById('addRadio');
 
-        const inputTitle = document.createElement('input');
-        inputTitle.type = 'text'
-        inputTitle.classList.add('form-control');
-        inputTitle.classList.add('col-5');
-        inputTitle.classList.add('my-3');
-        inputTitle.classList.add('inputTitle');
-        inputTitle.required = true;
-        let textareaNum = document.getElementsByClassName('textarea').length;
-        inputTitle.name = 'titleText' + String(textareaNum+1);
-        inputTitle.placeholder = '質問' + String(textareaNum+1);
+    addTextarea.addEventListener('click', ()=>{
+
+        const divFormGroup = createQuestionBase();
+
+        const titleRow = document.createElement('div');
+        titleRow.classList.add('row');
+        titleRow.classList.add('col-12');
+
+        const inputTitle = createQuestionTitle('Text');
 
         const textareaDisabled = document.createElement('input');
         textareaDisabled.type = 'text';
@@ -53,7 +48,7 @@
         textareaDisabled.classList.add('my-3');
         textareaDisabled.classList.add('textareaDummy');
         textareaDisabled.disabled = true;
-        textareaDisabled.placeholder = '回答' + String(textareaNum+1);
+        textareaDisabled.placeholder = '回答';
 
         const delBtn = document.createElement('button');
         delBtn.type = 'button';
@@ -64,19 +59,13 @@
         delBtn.classList.add('col-1');
         delBtn.classList.add('m-3');
         delBtn.addEventListener('click', ()=>{
-            delBtn.parentElement.parentElement.remove();
-            const inputTitles = document.getElementsByClassName('inputTitle');
-            const textareaDummies = document.getElementsByClassName('textareaDummy');
+            divFormGroup.remove();
+            const inputTitles = document.getElementsByClassName('titleText');
             for(let i = 0; i < inputTitles.length; i++){
-                inputTitles[i].name = 'title' + String(i+1);
+                inputTitles[i].name = 'titleText' + String(i+1);
                 inputTitles[i].placeholder = '質問' + String(i+1);
-                textareaDummies[i].placeholder = '回答' + String(i+1);
             }
         })
-
-        const titleRow = document.createElement('div');
-        titleRow.classList.add('row')
-        titleRow.classList.add('col-12')
 
         titleRow.appendChild(inputTitle);
         titleRow.appendChild(delBtn);
@@ -84,4 +73,146 @@
         divFormGroup.appendChild(textareaDisabled);
         addFormArea.appendChild(divFormGroup);
     })
+
+    addRadio.addEventListener('click', ()=>{
+        const divFormGroup = createQuestionBase();
+
+        const titleRow = document.createElement('div');
+        titleRow.classList.add('row');
+        titleRow.classList.add('col-12');
+
+        const inputTitle = createQuestionTitle('Radio');
+
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.textContent = '削除';
+        delBtn.classList.add('btn');
+        delBtn.classList.add('btn-sm');
+        delBtn.classList.add('btn-danger');
+        delBtn.classList.add('col-1');
+        delBtn.classList.add('m-3');
+        delBtn.addEventListener('click', ()=>{
+            divFormGroup.remove();
+            const inputTitles = document.getElementsByClassName('titleRadio');
+            for(let i = 0; i < inputTitles.length; i++){
+                inputTitles[i].name = 'titleRadio' + String(i+1);
+                inputTitles[i].placeholder = '質問' + String(i+1);
+            }
+        })
+
+        titleRow.appendChild(inputTitle);
+        titleRow.appendChild(delBtn);
+
+        let divFormCheck = document.createElement('div');
+        divFormCheck.classList.add('form-check');
+
+        const radioRow = document.createElement('div');
+        radioRow.classList.add('row');
+        radioRow.classList.add('col-12');
+
+        let radioDummy = document.createElement('input');
+        radioDummy.classList.add('form-check-input');
+        radioDummy.classList.add('mt-4');
+        radioDummy.type = 'radio';
+        radioDummy.disabled = true;
+
+        let inputRadioContent = document.createElement('input');
+        inputRadioContent.classList.add('form-control');
+        inputRadioContent.classList.add('my-2');
+        inputRadioContent.classList.add('col-5');
+        inputRadioContent.classList.add('inputRadioContent');
+        inputRadioContent.placeholder = '選択肢'
+        inputRadioContent.required = true;
+        inputRadioContent.name = inputTitle.name + '_1';
+
+        radioRow.appendChild(radioDummy);
+        radioRow.appendChild(inputRadioContent);
+        divFormCheck.appendChild(radioRow);
+
+        const addRadioSelecter = document.createElement('button');
+        addRadioSelecter.textContent = '＋選択肢の追加';
+        addRadioSelecter.type = 'button';
+        addRadioSelecter.classList.add('btn');
+        addRadioSelecter.classList.add('btn-outline-secondary');
+        addRadioSelecter.classList.add('btn-sm');
+        addRadioSelecter.classList.add('m-3');
+
+        addRadioSelecter.addEventListener('click', ()=>{
+
+            const otherRadioRow = document.createElement('div');
+            otherRadioRow.classList.add('row');
+            otherRadioRow.classList.add('col-12');
+
+            let otherRadioDummy = document.createElement('input');
+            otherRadioDummy.classList.add('form-check-input');
+            otherRadioDummy.classList.add('mt-4');
+            otherRadioDummy.type = 'radio';
+            otherRadioDummy.disabled = true;
+
+            let otherInputRadioContent = document.createElement('input');
+            otherInputRadioContent.classList.add('form-control');
+            otherInputRadioContent.classList.add('col-5');
+            otherInputRadioContent.classList.add('my-2');
+            otherInputRadioContent.classList.add('inputRadioContent');
+            otherInputRadioContent.placeholder = '選択肢'
+            otherInputRadioContent.required = true;
+
+            const delRadionSelector = document.createElement('button');
+            delRadionSelector.type = 'button';
+            delRadionSelector.classList.add('btn');
+            delRadionSelector.classList.add('btn-danger');
+            delRadionSelector.classList.add('btn-sm');
+            delRadionSelector.classList.add('m-2');
+            delRadionSelector.classList.add('bi');
+            delRadionSelector.classList.add('bi-dash-circle');
+
+            delRadionSelector.addEventListener('click', ()=>{
+                otherRadioRow.remove();
+                let inputRadioContents = divFormCheck.getElementsByClassName('inputRadioContent');
+                for(let i = 0; i < inputRadioContents.length; i++){
+                    inputRadioContents[i].name = inputTitle.name + '_' + String(i+1);
+                }
+            })
+
+            otherRadioRow.appendChild(otherRadioDummy);
+            otherRadioRow.appendChild(otherInputRadioContent);
+            otherRadioRow.appendChild(delRadionSelector);
+            divFormCheck.appendChild(otherRadioRow);
+
+            let inputRadioContents = divFormCheck.getElementsByClassName('inputRadioContent');
+            for(let i = 0; i < inputRadioContents.length; i++){
+                inputRadioContents[i].name = inputTitle.name + '_' + String(i+1);
+            }
+
+        })
+
+        divFormGroup.appendChild(titleRow);
+        divFormGroup.appendChild(divFormCheck);
+        divFormGroup.appendChild(addRadioSelecter);
+        addFormArea.appendChild(divFormGroup);
+
+    })
+
+    function createQuestionBase(){
+        const divFormGroup = document.createElement('div');
+        divFormGroup.classList.add('form-group');
+        divFormGroup.classList.add('my-4');
+        divFormGroup.classList.add('questionArea');
+        return divFormGroup;
+    }
+
+    function createQuestionTitle(typeName){
+        const inputTitle = document.createElement('input');
+        inputTitle.type = 'text'
+        inputTitle.classList.add('form-control');
+        inputTitle.classList.add('col-5');
+        inputTitle.classList.add('my-3');
+        inputTitle.classList.add('title' + typeName);
+        inputTitle.required = true;
+        let questionAreaNum = document.getElementsByClassName('questionArea').length;
+        inputTitle.placeholder = '質問' + String(questionAreaNum+1);
+        let inputTitleByType = document.getElementsByClassName('title' + typeName).length;
+        inputTitle.name = 'title' + typeName + String(inputTitleByType+1);
+        return inputTitle;
+    }
 </script>
