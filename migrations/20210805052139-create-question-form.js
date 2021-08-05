@@ -1,26 +1,17 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('textAnswers', {
+    await queryInterface.createTable('QuestionForms', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      textQuestion_id: {
-        type: Sequelize.INTEGER,
-        references:{
-          model:{
-            tableName: 'textQuestions',
-            key: 'id',
-          }
-        }
-      },
-      content: {
+      title_form: {
         type: Sequelize.STRING
       },
-      answer_user: {
+      create_user: {
         type: Sequelize.INTEGER,
         references:{
           model:{
@@ -40,6 +31,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('textAnswers');
+    await queryInterface.dropTable('QuestionForms');
   }
 };

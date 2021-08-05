@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class question extends Model {
+  class RadioSelector extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,12 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  question.init({
-    title: DataTypes.STRING,
-    create_user: DataTypes.INTEGER
+  RadioSelector.init({
+    question_content: DataTypes.STRING,
+    question_id: DataTypes.INTEGER,
+    order_num: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'question',
+    modelName: 'RadioSelector',
   });
-  return question;
+  return RadioSelector;
 };

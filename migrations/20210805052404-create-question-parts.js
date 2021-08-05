@@ -1,24 +1,30 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('questions', {
+    await queryInterface.createTable('QuestionParts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING,
+      title_parts: {
+        type: Sequelize.STRING
       },
-      create_user: {
+      form_id: {
         type: Sequelize.INTEGER,
         references:{
           model:{
-            tableName: 'Users',
+            tableName: 'QuestionForms',
             key: 'id',
           }
         }
+      },
+      is_radio: {
+        type: Sequelize.BOOLEAN
+      },
+      order_num: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('questions');
+    await queryInterface.dropTable('QuestionParts');
   }
 };
