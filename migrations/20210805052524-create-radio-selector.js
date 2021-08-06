@@ -20,9 +20,6 @@ module.exports = {
           }
         }
       },
-      order_num: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

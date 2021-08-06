@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     title_parts: DataTypes.STRING,
     form_id: DataTypes.INTEGER,
     is_radio: DataTypes.BOOLEAN,
-    order_num: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'QuestionParts',

@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   RadioSelector.init({
     question_content: DataTypes.STRING,
     question_id: DataTypes.INTEGER,
-    order_num: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'RadioSelector',

@@ -21,23 +21,51 @@ router.get('/create', authMiddleware, (req, res, next) => {
 
 router.post('/create', authMiddleware, (req, res, next) => {
 
+    let radioRegex;
+    const radioQuestionPartsAry = [];
+
     db.sequelize.sync()
-        .then( () => db.question.create(
-            {
-                title: req.body.title,
+        .then( () => db.QuestionForm.create({
+                title_form: req.body.title,
                 create_user: req.user.id,
-            }
-        ) )
+            }) )
         .then( questionBase => {
             for(let key in req.body){
-                if(key.match(/^titleText[0-9]$/)){
+                if(key.match(/^titleText[0-9]*$/)){
                     db.sequelize.sync()
-                        .then(()=>db.textQuestion.create(
-                            {
-                                question_id: questionBase.id,
-                                title: req.body[key],
+                        .then( ()=>{
+                            db.QuestionParts.create({
+                                    form_id: questionBase.id,
+                                    title_parts: req.body[key],
+                                    is_radio: false,
+                            })
+                        } )
+                        .catch(err=>{
+                            return res.redirect('/question/create');
+                        })
+                }else if(key.match(/^titleRadio[0-9]*$/)){
+                    db.sequelize.sync()
+                        .then( ()=>
+                            db.QuestionParts.create({
+                                form_id: questionBase.id,
+                                title_parts: req.body[key],
+                                is_radio: true,
+                            })
+                         )
+                        .then( questionParts => {
+                            radioRegex = new RegExp('^' + key + '_[0-9]*$');
+                            for(let key2 in req.body){
+                                if(key2.match(radioRegex)){
+                                    db.sequelize.sync()
+                                        .then( () => {
+                                            db.RadioSelector.create({
+                                                question_content: req.body[key2],
+                                                question_id: questionParts.id,
+                                            })
+                                        } )
+                                }
                             }
-                        ))
+                        } )
                         .catch(err=>{
                             return res.redirect('/question/create');
                         })

@@ -23,9 +23,6 @@ module.exports = {
       is_radio: {
         type: Sequelize.BOOLEAN
       },
-      order_num: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
