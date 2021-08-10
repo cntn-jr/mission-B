@@ -17,6 +17,15 @@ module.exports = {
           }
         }
       },
+      question_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model:{
+            tableName: 'QuestionParts',
+            key: 'id',
+          }
+        }
+      },
       answer_user: {
         type: Sequelize.INTEGER,
         references:{

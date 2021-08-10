@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   AnswerRadio.init({
     select_answer: DataTypes.INTEGER,
+    question_id: DataTypes.INTEGER,
     answer_user: DataTypes.INTEGER
   }, {
     sequelize,
