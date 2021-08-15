@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-md-8 mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4><%= title_form %>　回答一覧</h4>
+            </div>
+            <div class="card-body">
+                <div class='form-group m-4'>
+                    <h5 class='my-4'>回答者</h5>
+                    <% for(let key in is_answer){ %>
+                        <div class='row col ml-4'><h6><%= is_answer[key].name %></h6></div>
+                    <% } %>
+                </div>
+                <hr>
+                <% for(let key in question_parts){ %>
+                    <div class='form-group m-4'>
+                        <h5 class='my-4'><%= question_parts[key].title_parts %></h5>
+                        <% if(question_parts[key].is_radio){ %>
+                            <% for(let key2 in radio){ %>
+                                <% if(radio[key2].question_id === question_parts[key].id){ %>
+                                    <div class='row col ml-4'>
+                                        <div class='col-4'>
+                                            <input type='radio' class='form-check-input' disabled>
+                                            <label><h6><%= radio[key2].question_content %></h6></label>
+                                        </div>
+                                        <div class='col-2'>
+                                            <h6><%= answer_radio[question_parts[key].id][radio[key2].id] %>件</h6>
+                                        </div>
+                                        <div class='col-2'>
+                                            <h6><%= Math.floor(answer_radio[question_parts[key].id][radio[key2].id]/answer_radio[question_parts[key].id]['sum']*10000)/100 %> %</h6>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% }else{ %>
+                            <% for(let key2 in answer_text){ %>
+                                <% if(answer_text[key2].question_id === question_parts[key].id){ %>
+                                    <div class='row col ml-4'><h6><%= answer_text[key2].content_answer %></h6></div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                        <hr>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

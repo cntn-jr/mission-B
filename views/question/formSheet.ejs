@@ -19,7 +19,7 @@
                                     <% if(question_parts[key].id === radio[key2].question_id){ %>
                                         <div class='row col-5 mx-auto'>
                                             <input type='radio' class='form-check-input' id='<%= radio[key2].id %>' name='<%= question_parts[key].id %>' value='<%= radio[key2].id %>'>
-                                            <label for='<%= radio[key2].id %>'><%= radio[key2].question_content %></label>
+                                            <label for='<%= radio[key2].id %>'><h6><%= radio[key2].question_content %></h6></label>
                                         </div>
                                     <% } %>
                                 <% } %>
