@@ -3,59 +3,71 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const now = new Date();
-    return queryInterface.bulkInsert('RadioSelectors', [
+    return queryInterface.bulkInsert('IsAnswers', [
       {
         id: 1,
-        question_content: 'java',
-        question_id: 2,
+        form_id: 2,
+        answer_user: 2,
         createdAt: now, updatedAt: now
       },
       {
         id: 2,
-        question_content: 'PHP',
-        question_id: 2,
+        form_id: 2,
+        answer_user: 3,
         createdAt: now, updatedAt: now
       },
       {
         id: 3,
-        question_content: 'Python',
-        question_id: 2,
+        form_id: 2,
+        answer_user: 4,
         createdAt: now, updatedAt: now
       },
       {
         id: 4,
-        question_content: 'JavaScript',
-        question_id: 2,
+        form_id: 2,
+        answer_user: 5,
         createdAt: now, updatedAt: now
       },
       {
         id: 5,
-        question_content: 'その他',
-        question_id: 2,
+        form_id: 2,
+        answer_user: 6,
         createdAt: now, updatedAt: now
       },
       {
         id: 6,
-        question_content: '愛媛県',
-        question_id: 4,
+        form_id: 2,
+        answer_user: 7,
         createdAt: now, updatedAt: now
       },
       {
         id: 7,
-        question_content: '香川県',
-        question_id: 4,
+        form_id: 2,
+        answer_user: 8,
         createdAt: now, updatedAt: now
       },
       {
         id: 8,
-        question_content: '高知県',
-        question_id: 4,
+        form_id: 2,
+        answer_user: 9,
         createdAt: now, updatedAt: now
       },
       {
         id: 9,
-        question_content: '徳島県',
-        question_id: 4,
+        form_id: 2,
+        answer_user: 10,
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 10,
+        form_id: 2,
+        answer_user: 11,
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 11,
+        form_id: 2,
+        answer_user: 12,
         createdAt: now, updatedAt: now
       },
 
