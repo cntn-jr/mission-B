@@ -18,6 +18,20 @@ module.exports = {
         is_radio: true,
         createdAt: now, updatedAt: now
       },
+      {
+        id: 3,
+        title_parts: '名前を入力して下さい',
+        form_id: 2,
+        is_radio: false,
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 4,
+        title_parts: '住んでいる地域を教えて下さい',
+        form_id: 2,
+        is_radio: true,
+        createdAt: now, updatedAt: now
+      },
     ], {});
   },
 

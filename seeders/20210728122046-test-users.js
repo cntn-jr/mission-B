@@ -26,6 +26,69 @@ module.exports = {
         password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
         createdAt: now, updatedAt: now
       },
+      {
+        id: 4,
+        name: 'test4',
+        email: 'test4@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 5,
+        name: 'test5',
+        email: 'test5@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 6,
+        name: 'test6',
+        email: 'test6@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 7,
+        name: 'test7',
+        email: 'test7@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 8,
+        name: 'test8',
+        email: 'test8@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 9,
+        name: 'test9',
+        email: 'test9@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 10,
+        name: 'test10',
+        email: 'test10@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 11,
+        name: 'test11',
+        email: 'test11@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
+      {
+        id: 12,
+        name: 'test12',
+        email: 'test12@example.com',
+        password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
+        createdAt: now, updatedAt: now
+      },
     ], {});
   },
 

@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+    <div class="col-md-8 mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>作成した質問一覧</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush m-3">
+                    <% for(let key in question_form){ %>
+                        <a href='/question/answers/<%=question_form[key].id%>'>
+                            <li class="list-group-item">
+                                <%= question_form[key].title_form %>
+                            </li>
+                        </a>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
